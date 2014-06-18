@@ -4,11 +4,6 @@ namespace ByteUnits;
 
 class FormatInMetricSystemTest extends \PHPUnit_Framework_TestCase
 {
-    public function testBytesAreInMetricStystem()
-    {
-        $this->assertInstanceOf('ByteUnits\Metric', bytes(1));
-    }
-
     public function testBytesNamedConstructor()
     {
         $this->assertEquals(new Metric(1), Metric::bytes(1));

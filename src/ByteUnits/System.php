@@ -30,6 +30,16 @@ abstract class System
         return $this->formatInByteUnit($byteUnit, $precision);
     }
 
+    public function asBinary()
+    {
+        return Binary::bytes($this->numberOfBytes);
+    }
+
+    public function asMetric()
+    {
+        return Metric::bytes($this->numberOfBytes);
+    }
+
     private function byteUnitToFormatTo($howToFormat)
     {
         if (is_string($howToFormat)) {
