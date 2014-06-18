@@ -2,10 +2,8 @@
 
 namespace ByteUnits;
 
-class Metric
+class Metric extends System
 {
-    const MAX_PRECISION = 10;
-
     private $numberOfBytes;
     private $precision;
 
@@ -81,7 +79,7 @@ class Metric
     private function precisionFrom($howToFormat)
     {
         if (is_integer($howToFormat)) {
-            return min($howToFormat, self::MAX_PRECISION);
+            return min($howToFormat, self::MAXIMUM_PRECISION);
         }
         if (is_string($howToFormat)) {
             if (preg_match('/^.*\/(?<precision>0+)$/', $howToFormat, $matches)) {
@@ -98,20 +96,8 @@ class Metric
     {
         return bcdiv(
             $dividend,
-            bcpow($base, $power, self::MAX_PRECISION),
-            self::MAX_PRECISION
+            bcpow($base, $power, self::MAXIMUM_PRECISION),
+            self::MAXIMUM_PRECISION
         );
-    }
-
-    private function normalize($numberOfBytes)
-    {
-        $numberOfBytes = (string) $numberOfBytes;
-        if (preg_match('/^(?P<coefficient>\d+(?:\.\d+))E\+(?P<exponent>\d+)$/', $numberOfBytes, $matches)) {
-            $numberOfBytes = bcmul(
-                $matches['coefficient'],
-                bcpow($base = 10, $matches['exponent'], self::MAX_PRECISION)
-            );
-        }
-        return $numberOfBytes;
     }
 }
