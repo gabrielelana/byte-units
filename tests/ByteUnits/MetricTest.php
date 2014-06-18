@@ -59,4 +59,11 @@ class MetricTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1.25GB', $bytes->format('Gb'));
         $this->assertEquals('1.25GB', $bytes->format('gb'));
     }
+
+    public function testFormatInByteUnitWithPrecision()
+    {
+        $this->assertEquals('1.250000GB', Metric::bytes(1250000000)->format('GB/000000'));
+        $this->assertEquals('0.001250GB', Metric::bytes(1250000)->format('GB/000000'));
+        $this->assertEquals('0.000001GB', Metric::bytes(1250)->format('GB/000000'));
+    }
 }
