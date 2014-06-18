@@ -2,7 +2,7 @@
 
 namespace ByteUnits;
 
-class MetricTest extends \PHPUnit_Framework_TestCase
+class FormatInMetricSystemTest extends \PHPUnit_Framework_TestCase
 {
     public function testBytesAreInMetricStystem()
     {
