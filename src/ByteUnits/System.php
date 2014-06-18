@@ -7,19 +7,19 @@ abstract class System
     const NORMAL_PRECISION = 2;
     const MAXIMUM_PRECISION = 10;
 
-    protected $numberOfBytes;
     protected $precision;
+    protected $numberOfBytes;
     protected $matchAllKnownByteUnits;
 
-    public static function bytes($numberOf)
+    public static function bytes($numberOf, $precision = self::NORMAL_PRECISION)
     {
-        return new static($numberOf);
+        return new static($numberOf, $precision);
     }
 
-    public function __construct($numberOfBytes)
+    public function __construct($numberOfBytes, $precision = self::NORMAL_PRECISION)
     {
+        $this->precision = $precision;
         $this->numberOfBytes = $this->normalize($numberOfBytes);
-        $this->precision = self::NORMAL_PRECISION;
         $this->matchAllKnownByteUnits = implode('|', array_keys($this->suffixes));
     }
 
@@ -74,7 +74,7 @@ abstract class System
             return min($howToFormat, self::MAXIMUM_PRECISION);
         }
         if (is_string($howToFormat)) {
-            if (preg_match('/^.*\/(?<precision>0+)$/', $howToFormat, $matches)) {
+            if (preg_match('/^.*\/(?<precision>0*)$/', $howToFormat, $matches)) {
                 return strlen($matches['precision']);
             }
             if (preg_match('/^.*\/(?<precision>\d+)$/', $howToFormat, $matches)) {

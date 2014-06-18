@@ -66,4 +66,11 @@ class FormatInMetricSystemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('0.001250GB', Metric::bytes(1250000)->format('GB/000000'));
         $this->assertEquals('0.000001GB', Metric::bytes(1250)->format('GB/000000'));
     }
+
+    public function testFormatWithRoundPrecision()
+    {
+        $this->assertEquals('1MB', Metric::bytes(1259566)->format(0));
+        $this->assertEquals('1MB', Metric::bytes(1259566)->format('MB/'));
+        $this->assertEquals('1MB', Metric::bytes(1259566, 0)->format());
+    }
 }
