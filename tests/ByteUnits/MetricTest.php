@@ -43,4 +43,20 @@ class MetricTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1250.00MB', $bytes->format('MB'));
         $this->assertEquals('1.25GB', $bytes->format('GB'));
     }
+
+    public function testFormatInByteUnitIsCaseInsensitive()
+    {
+        $bytes = Metric::bytes(1250000000);
+        $this->assertEquals('1250000000B', $bytes->format('b'));
+        $this->assertEquals('1250000.00kB', $bytes->format('KB'));
+        $this->assertEquals('1250000.00kB', $bytes->format('kb'));
+        $this->assertEquals('1250.00MB', $bytes->format('MB'));
+        $this->assertEquals('1250.00MB', $bytes->format('mB'));
+        $this->assertEquals('1250.00MB', $bytes->format('Mb'));
+        $this->assertEquals('1250.00MB', $bytes->format('mb'));
+        $this->assertEquals('1.25GB', $bytes->format('GB'));
+        $this->assertEquals('1.25GB', $bytes->format('gB'));
+        $this->assertEquals('1.25GB', $bytes->format('Gb'));
+        $this->assertEquals('1.25GB', $bytes->format('gb'));
+    }
 }

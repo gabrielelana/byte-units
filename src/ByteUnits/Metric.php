@@ -44,8 +44,10 @@ class Metric
     {
         if (is_string($howToFormat)) {
             if (preg_match('/^(?P<unit>YB|ZB|EB|PB|TB|GB|MB|kB|B)(?:\/.*$)?/i', $howToFormat, $matches)) {
-                if (array_key_exists($matches['unit'], $this->suffixes)) {
-                    return $matches['unit'];
+                foreach ($this->suffixes as $byteUnit => $_) {
+                    if (strtolower($byteUnit) === strtolower($matches['unit'])) {
+                        return $byteUnit;
+                    }
                 }
             }
         }
