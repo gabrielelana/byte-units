@@ -1,0 +1,67 @@
+<?php
+
+namespace ByteUnits;
+
+class PowerScale
+{
+    private $base;
+    private $scale;
+    private $precision;
+
+    public function __construct($base, $scale, $precision)
+    {
+        $this->base = $base;
+        $this->scale = $scale;
+        $this->precision = $precision;
+    }
+
+    public function scaleToUnit($quantity, $unit)
+    {
+        return bcdiv(
+            $quantity,
+            bcpow($this->base, $this->scale[$unit], $this->precision),
+            $this->precision
+        );
+    }
+
+    public function scaleFromUnit($quantity, $unit)
+    {
+        return bcpow(
+            $this->base,
+            $this->scale[$unit],
+            $this->precision
+        );
+    }
+
+    public function isKnownUnit($unitAsString)
+    {
+        return preg_match(
+            '/^' . implode('|', array_keys($this->scale)) . '$/i',
+            trim($unitAsString)
+        );
+    }
+
+    public function normalizeNameOfUnit($unitAsString)
+    {
+        foreach ($this->scale as $unit => $_) {
+            if (strtolower($unit) === strtolower($unitAsString)) {
+                return $unit;
+            }
+        }
+    }
+
+    public function normalUnitFor($quantity)
+    {
+        foreach ($this->scale as $unit => $_) {
+            $scaled = $this->scaleToUnit($quantity, $unit);
+            if (bccomp($scaled, 1) >= 0) {
+                return $unit;
+            }
+        }
+    }
+
+    public function isBaseUnit($unit)
+    {
+        return $this->scale[$unit] === 0;
+    }
+}

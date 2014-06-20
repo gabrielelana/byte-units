@@ -10,6 +10,7 @@ abstract class System
     protected $precision;
     protected $numberOfBytes;
     protected $matchAllKnownByteUnits;
+    protected $converter;
 
     public static function bytes($numberOf, $precision = self::NORMAL_PRECISION)
     {
@@ -21,6 +22,7 @@ abstract class System
         $this->precision = $precision;
         $this->numberOfBytes = $this->normalize($numberOfBytes);
         $this->matchAllKnownByteUnits = implode('|', array_keys($this->suffixes));
+        $this->converter = new PowerScale($this->base, $this->suffixes, self::MAXIMUM_PRECISION);
     }
 
     public function format($howToFormat = null)
@@ -43,39 +45,22 @@ abstract class System
     private function byteUnitToFormatTo($howToFormat)
     {
         if (is_string($howToFormat)) {
-            if (preg_match("/^(?P<unit>{$this->matchAllKnownByteUnits})(?:\/.*$)?/i", $howToFormat, $matches)) {
-                foreach ($this->suffixes as $byteUnit => $_) {
-                    if (strtolower($byteUnit) === strtolower($matches['unit'])) {
-                        return $byteUnit;
-                    }
+            if (preg_match("/^(?P<unit>[^\/]+)(?:\/.*$)?/i", $howToFormat, $matches)) {
+                if ($this->converter->isKnownUnit($matches['unit'])) {
+                    return $this->converter->normalizeNameOfUnit($matches['unit']);
                 }
             }
         }
-        return $this->mostReadableByteUnit();
+        return $this->converter->normalUnitFor($this->numberOfBytes);
     }
 
     private function formatInByteUnit($byteUnit, $precision)
     {
-        $scaled = $this->scaleInByteUnit($byteUnit);
-        if ($byteUnit === 'B') {
+        $scaled = $this->converter->scaleToUnit($this->numberOfBytes, $byteUnit);
+        if ($this->converter->isBaseUnit($byteUnit)) {
             return sprintf("%d%s", $scaled, $byteUnit);
         }
         return sprintf("%.{$precision}f%s", $scaled, $byteUnit);
-    }
-
-    private function mostReadableByteUnit()
-    {
-        foreach ($this->suffixes as $byteUnit => $_) {
-            $scaled = $this->scaleInByteUnit($byteUnit);
-            if (bccomp($scaled, 1) >= 0) {
-                return $byteUnit;
-            }
-        }
-    }
-
-    private function scaleInByteUnit($byteUnit)
-    {
-        return $this->div($this->numberOfBytes, $this->base, $this->suffixes[$byteUnit]);
     }
 
     private function precisionFrom($howToFormat)
@@ -92,15 +77,6 @@ abstract class System
             }
         }
         return $this->precision;
-    }
-
-    private function div($dividend, $base, $power)
-    {
-        return bcdiv(
-            $dividend,
-            bcpow($base, $power, self::MAXIMUM_PRECISION),
-            self::MAXIMUM_PRECISION
-        );
     }
 
     private function normalize($numberOfBytes)
