@@ -9,8 +9,7 @@ abstract class System
 
     protected $precision;
     protected $numberOfBytes;
-    protected $matchAllKnownByteUnits;
-    protected $converter;
+    protected $formatter;
 
     public static function bytes($numberOf, $precision = self::NORMAL_PRECISION)
     {
@@ -21,15 +20,14 @@ abstract class System
     {
         $this->precision = $precision;
         $this->numberOfBytes = $this->normalize($numberOfBytes);
-        $this->matchAllKnownByteUnits = implode('|', array_keys($this->suffixes));
-        $this->converter = new PowerScale($this->base, $this->suffixes, self::MAXIMUM_PRECISION);
+        $this->formatter = new Formatter(
+            new PowerScale($this->base, $this->suffixes, self::MAXIMUM_PRECISION),
+            $this->precision);
     }
 
     public function format($howToFormat = null)
     {
-        $precision = $this->precisionFrom($howToFormat);
-        $byteUnit = $this->byteUnitToFormatTo($howToFormat);
-        return $this->formatInByteUnit($byteUnit, $precision);
+        return $this->formatter->format($this->numberOfBytes, $howToFormat);
     }
 
     public function asBinary()
@@ -40,43 +38,6 @@ abstract class System
     public function asMetric()
     {
         return Metric::bytes($this->numberOfBytes);
-    }
-
-    private function byteUnitToFormatTo($howToFormat)
-    {
-        if (is_string($howToFormat)) {
-            if (preg_match("/^(?P<unit>[^\/]+)(?:\/.*$)?/i", $howToFormat, $matches)) {
-                if ($this->converter->isKnownUnit($matches['unit'])) {
-                    return $this->converter->normalizeNameOfUnit($matches['unit']);
-                }
-            }
-        }
-        return $this->converter->normalUnitFor($this->numberOfBytes);
-    }
-
-    private function formatInByteUnit($byteUnit, $precision)
-    {
-        $scaled = $this->converter->scaleToUnit($this->numberOfBytes, $byteUnit);
-        if ($this->converter->isBaseUnit($byteUnit)) {
-            return sprintf("%d%s", $scaled, $byteUnit);
-        }
-        return sprintf("%.{$precision}f%s", $scaled, $byteUnit);
-    }
-
-    private function precisionFrom($howToFormat)
-    {
-        if (is_integer($howToFormat)) {
-            return min($howToFormat, self::MAXIMUM_PRECISION);
-        }
-        if (is_string($howToFormat)) {
-            if (preg_match('/^.*\/(?<precision>0*)$/', $howToFormat, $matches)) {
-                return strlen($matches['precision']);
-            }
-            if (preg_match('/^.*\/(?<precision>\d+)$/', $howToFormat, $matches)) {
-                return intval($matches['precision']);
-            }
-        }
-        return $this->precision;
     }
 
     private function normalize($numberOfBytes)
