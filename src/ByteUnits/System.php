@@ -7,22 +7,18 @@ abstract class System
     const NORMAL_PRECISION = 2;
     const MAXIMUM_PRECISION = 10;
 
-    protected $precision;
-    protected $numberOfBytes;
     protected $formatter;
+    protected $numberOfBytes;
 
     public static function bytes($numberOf, $precision = self::NORMAL_PRECISION)
     {
         return new static($numberOf, $precision);
     }
 
-    public function __construct($numberOfBytes, $precision = self::NORMAL_PRECISION)
+    public function __construct($numberOfBytes, $formatter)
     {
-        $this->precision = $precision;
+        $this->formatter = $formatter;
         $this->numberOfBytes = $this->normalize($numberOfBytes);
-        $this->formatter = new Formatter(
-            new PowerScale($this->base, $this->suffixes, self::MAXIMUM_PRECISION),
-            $this->precision);
     }
 
     public function format($howToFormat = null)
