@@ -13,4 +13,10 @@ class Metric extends System
         $formatter = new Formatter($scale, $precision);
         parent::__construct($numberOfBytes, $formatter);
     }
+
+    public static function parser()
+    {
+        $scale = new PowerScale(self::$base, self::$suffixes, self::MAXIMUM_PRECISION);
+        return new Parser($scale, __CLASS__);
+    }
 }

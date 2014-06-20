@@ -26,7 +26,7 @@ class PowerScale
 
     public function scaleFromUnit($quantity, $unit)
     {
-        return bcpow(
+        return $quantity * bcpow(
             $this->base,
             $this->scale[$unit],
             $this->precision

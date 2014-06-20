@@ -18,5 +18,4 @@ class ConversionBetweenSystemsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('ByteUnits\Metric', Binary::bytes(1)->asMetric());
     }
-
 }

@@ -15,6 +15,11 @@ abstract class System
         return new static($numberOf, $precision);
     }
 
+    public static function parse($bytesAsString)
+    {
+        return static::parser()->parse($bytesAsString);
+    }
+
     public function __construct($numberOfBytes, $formatter)
     {
         $this->formatter = $formatter;
