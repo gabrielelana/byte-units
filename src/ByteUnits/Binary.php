@@ -51,14 +51,6 @@ class Binary extends System
 
     public static function parser()
     {
-        return self::$parser = self::$parser ?: new Parser(self::$scale, __CLASS__);
-    }
-
-    /**
-     * @expectedException ByteUnits\NegativeBytesException
-     */
-    public function testCannotBeNegative()
-    {
-        Binary::bytes(-1);
+        return self::$parser = self::$parser ?: new Parser(self::scale(), __CLASS__);
     }
 }

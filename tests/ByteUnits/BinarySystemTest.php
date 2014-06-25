@@ -33,4 +33,12 @@ class BinarySystemTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(Binary::bytes(1152921504606846976), Binary::exabytes(1));
     }
+
+    /**
+     * @expectedException ByteUnits\NegativeBytesException
+     */
+    public function testCannotBeNegative()
+    {
+        Binary::bytes(-1);
+    }
 }
