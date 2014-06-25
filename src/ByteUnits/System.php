@@ -46,27 +46,36 @@ abstract class System
 
     public function equalTo($another)
     {
-        return $this->numberOfBytes === $another->numberOfBytes;
+        return self::compare($this, $another) === 0;
     }
 
     public function greaterThanOrEqualTo($another)
     {
-        return $this->numberOfBytes >= $another->numberOfBytes;
+        return self::compare($this, $another) >= 0;
     }
 
     public function greaterThan($another)
     {
-        return $this->numberOfBytes > $another->numberOfBytes;
+        return self::compare($this, $another) > 0;
     }
 
     public function lessThanOrEqualTo($another)
     {
-        return $this->numberOfBytes <= $another->numberOfBytes;
+        return self::compare($this, $another) <= 0;
     }
 
     public function lessThan($another)
     {
-        return $this->numberOfBytes < $another->numberOfBytes;
+        return self::compare($this, $another) < 0;
+    }
+
+    public static function compare($left, $right)
+    {
+        return bccomp(
+            $left->numberOfBytes,
+            $right->numberOfBytes,
+            self::COMPUTE_WITH_PRECISION
+        );
     }
 
     public function format($howToFormat = null)
