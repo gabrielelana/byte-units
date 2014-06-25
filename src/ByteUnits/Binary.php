@@ -9,6 +9,36 @@ class Binary extends System
     private static $scale;
     private static $parser;
 
+    public static function kilobytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'KiB'));
+    }
+
+    public static function megabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'MiB'));
+    }
+
+    public static function gigabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'GiB'));
+    }
+
+    public static function terabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'TiB'));
+    }
+
+    public static function petabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'PiB'));
+    }
+
+    public static function exabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'EiB'));
+    }
+
     public function __construct($numberOfBytes, $precision = self::NORMAL_PRECISION)
     {
         parent::__construct($numberOfBytes, new Formatter(self::scale(), $precision));
