@@ -14,6 +14,36 @@ class Metric extends System
         parent::__construct($numberOfBytes, new Formatter(self::scale(), $precision));
     }
 
+    public static function kilobytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'kB'));
+    }
+
+    public static function megabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'MB'));
+    }
+
+    public static function gigabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'GB'));
+    }
+
+    public static function terabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'TB'));
+    }
+
+    public static function petabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'PB'));
+    }
+
+    public static function exabytes($numberOf)
+    {
+        return new self(self::scale()->scaleFromUnit($numberOf, 'EB'));
+    }
+
     public static function scale()
     {
         return self::$scale = self::$scale ?: new PowerScale(self::$base, self::$suffixes, self::MAXIMUM_PRECISION);
