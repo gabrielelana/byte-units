@@ -28,6 +28,22 @@ abstract class System
         $this->numberOfBytes = $this->normalize($numberOfBytes);
     }
 
+    public function add($another)
+    {
+        return new static(
+            $this->numberOfBytes + $another->numberOfBytes,
+            $this->formatter->precision()
+        );
+    }
+
+    public function remove($another)
+    {
+        return new static(
+            $this->numberOfBytes - $another->numberOfBytes,
+            $this->formatter->precision()
+        );
+    }
+
     public function equalTo($another)
     {
         return $this->numberOfBytes === $another->numberOfBytes;

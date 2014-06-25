@@ -13,6 +13,11 @@ class Formatter
         $this->precision = $precision;
     }
 
+    public function precision()
+    {
+        return $this->precision;
+    }
+
     public function format($numberOfBytes, $howToFormat)
     {
         $precision = $this->precisionFrom($howToFormat);
