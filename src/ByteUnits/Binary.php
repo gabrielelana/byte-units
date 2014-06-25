@@ -11,8 +11,12 @@ class Binary extends System
 
     public function __construct($numberOfBytes, $precision = self::NORMAL_PRECISION)
     {
-        self::$scale = new PowerScale(self::$base, self::$suffixes, self::MAXIMUM_PRECISION);
-        parent::__construct($numberOfBytes, new Formatter(self::$scale, $precision));
+        parent::__construct($numberOfBytes, new Formatter(self::scale(), $precision));
+    }
+
+    public static function scale()
+    {
+        return self::$scale = self::$scale ?: new PowerScale(self::$base, self::$suffixes, self::MAXIMUM_PRECISION);
     }
 
     public static function parser()
