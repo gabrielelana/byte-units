@@ -20,4 +20,12 @@ class ParseTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(Metric::bytes(1000), parse('1000'));
     }
+
+    /**
+     * @expectedException ByteUnits\ParseException
+     */
+    public function testInvalidByteFormat()
+    {
+        parse('Not a valid byte format');
+    }
 }

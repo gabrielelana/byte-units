@@ -9,13 +9,14 @@ function bytes($numberOf)
 
 function parse($bytesAsString)
 {
+    $lastParseException = null;
     $parsers = [Metric::parser(), Binary::parser()];
     foreach ($parsers as $parser) {
         try {
             return $parser->parse($bytesAsString);
         } catch (\Exception $e) {
-            // do noting, see you later
+            $lastParseException = $e;
         }
     }
-    throw new \Exception("'{$bytesAsString}' is not a valid byte format");
+    throw $lastParseException;
 }

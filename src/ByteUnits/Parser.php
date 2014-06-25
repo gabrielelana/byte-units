@@ -3,7 +3,6 @@
 namespace ByteUnits;
 
 use ReflectionClass;
-use Exception;
 
 class Parser
 {
@@ -28,6 +27,6 @@ class Parser
                 return $this->system->newInstanceArgs([$quantity]);
             }
         }
-        throw new Exception();
+        throw new ParseException("'{$quantityWithUnit}' is not a valid byte format");
     }
 }
