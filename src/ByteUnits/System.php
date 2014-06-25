@@ -20,8 +20,6 @@ abstract class System
         return static::parser()->parse($bytesAsString);
     }
 
-    public static abstract function parser();
-
     public function __construct($numberOfBytes, $formatter)
     {
         $this->formatter = $formatter;
