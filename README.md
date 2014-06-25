@@ -1,4 +1,4 @@
-## Byte Units
+## Byte Units [![Build Status](https://travis-ci.org/gabrielelana/byte-units.svg?branch=master)](https://travis-ci.org/gabrielelana/byte-units)
 This is a utility component for parsing, formatting, converting and manipulating byte units in various formats.
 
 ## Usage
