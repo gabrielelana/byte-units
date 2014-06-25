@@ -33,4 +33,12 @@ class MetricSystemTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(Metric::bytes(1000000000000000000), Metric::exabytes(1));
     }
+
+    /**
+     * @expectedException ByteUnits\NegativeBytesException
+     */
+    public function testCannotBeNegative()
+    {
+        Metric::bytes(-1);
+    }
 }

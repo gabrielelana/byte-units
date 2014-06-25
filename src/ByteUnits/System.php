@@ -25,13 +25,13 @@ abstract class System
     public function __construct($numberOfBytes, $formatter)
     {
         $this->formatter = $formatter;
-        $this->numberOfBytes = $this->normalize($numberOfBytes);
+        $this->numberOfBytes = $this->ensureIsNotNegative($this->normalize($numberOfBytes));
     }
 
     public function add($another)
     {
         return new static(
-            $this->numberOfBytes + $another->numberOfBytes,
+            bcadd($this->numberOfBytes, $another->numberOfBytes, self::COMPUTE_WITH_PRECISION),
             $this->formatter->precision()
         );
     }
@@ -39,7 +39,7 @@ abstract class System
     public function remove($another)
     {
         return new static(
-            $this->numberOfBytes - $another->numberOfBytes,
+            bcsub($this->numberOfBytes, $another->numberOfBytes, self::COMPUTE_WITH_PRECISION),
             $this->formatter->precision()
         );
     }
@@ -92,6 +92,14 @@ abstract class System
                 $matches['coefficient'],
                 bcpow($base = 10, $matches['exponent'], self::COMPUTE_WITH_PRECISION)
             );
+        }
+        return $numberOfBytes;
+    }
+
+    private function ensureIsNotNegative($numberOfBytes)
+    {
+        if (bccomp($numberOfBytes, 0) < 0) {
+            throw new NegativeBytesException();
         }
         return $numberOfBytes;
     }

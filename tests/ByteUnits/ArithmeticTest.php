@@ -16,6 +16,14 @@ class ArithmeticTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Binary::bytes(3), Binary::bytes(5)->remove(Binary::bytes(2)));
     }
 
+    /**
+     * @expectedException ByteUnits\NegativeBytesException
+     */
+    public function testCannotRemoveMoreBytesThanYouHave()
+    {
+        Metric::bytes(5)->remove(Metric::bytes(10));
+    }
+
     public function testPreserveSystemUnitOfReceiver()
     {
         $this->assertEquals(Metric::bytes(3), Metric::bytes(5)->remove(Binary::bytes(2)));
