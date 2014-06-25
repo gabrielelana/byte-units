@@ -9,7 +9,7 @@ This is a utility component for parsing, formatting, converting and manipulating
 echo ByteUnits\parse('1.42MB')->add('256B')->format('kB/0000'); // outputs 1420.2560kB
 
 // Bytes comparison
-echo ByteUnits\parse('1.2GB')->isLessThan('256MB'); // outputs true
+ByteUnits\parse('1.2GB')->isLessThan('256MB'); // it's true
 ```
 
 ### Parsing
@@ -67,9 +67,9 @@ There are a few methods that could be used to compare bytes in various units and
 ```php
 <?php
 
-ByteUnits\Metric::kilobytes(1)->isLessThan(ByteUnits\Binary::kilobytes(1)); // is true
-ByteUnits\Metric::kilobytes(1)->isEqualTo(ByteUnits\Binary::bytes(1000)); // is true
-ByteUnits\Metric::kilobytes(1.3)->isGreaterThan(ByteUnits\Binary::kilobytes(1)); // is true
+ByteUnits\Metric::kilobytes(1)->isLessThan(ByteUnits\Binary::kilobytes(1)); // it's true
+ByteUnits\Metric::kilobytes(1)->isEqualTo(ByteUnits\Binary::bytes(1000)); // it's true
+ByteUnits\Metric::kilobytes(1.3)->isGreaterThan(ByteUnits\Binary::kilobytes(1)); // it's true
 ```
 
 ### Manipulate
@@ -90,7 +90,7 @@ ByteUnits\Metric::kilobytes(1)->remove(ByteUnits\Binary::kilobytes(1))->format()
 Most of the methods can take integers or strings and box them to appropriate byte units
 ```php
 
-ByteUnits\Metric::kilobytes(1)->isLessThan('1KiB'); // is true
+ByteUnits\Metric::kilobytes(1)->isLessThan('1KiB'); // it's true
 echo ByteUnits\Binary::kilobytes(1)->remove('1KiB')->format(); // outputs 24B
 ```
 
