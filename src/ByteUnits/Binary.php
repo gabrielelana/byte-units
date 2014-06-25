@@ -39,14 +39,14 @@ class Binary extends System
         return new self(self::scale()->scaleFromUnit($numberOf, 'EiB'));
     }
 
-    public function __construct($numberOfBytes, $precision = self::NORMAL_PRECISION)
+    public function __construct($numberOfBytes, $formatWithPrecision = self::DEFAULT_FORMAT_PRECISION)
     {
-        parent::__construct($numberOfBytes, new Formatter(self::scale(), $precision));
+        parent::__construct($numberOfBytes, new Formatter(self::scale(), $formatWithPrecision));
     }
 
     public static function scale()
     {
-        return self::$scale = self::$scale ?: new PowerScale(self::$base, self::$suffixes, self::MAXIMUM_PRECISION);
+        return self::$scale = self::$scale ?: new PowerScale(self::$base, self::$suffixes, self::COMPUTE_WITH_PRECISION);
     }
 
     public static function parser()

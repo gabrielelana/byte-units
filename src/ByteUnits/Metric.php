@@ -9,9 +9,9 @@ class Metric extends System
     private static $scale;
     private static $parser;
 
-    public function __construct($numberOfBytes, $precision = self::NORMAL_PRECISION)
+    public function __construct($numberOfBytes, $formatWithPrecision = self::DEFAULT_FORMAT_PRECISION)
     {
-        parent::__construct($numberOfBytes, new Formatter(self::scale(), $precision));
+        parent::__construct($numberOfBytes, new Formatter(self::scale(), $formatWithPrecision));
     }
 
     public static function kilobytes($numberOf)
@@ -46,7 +46,7 @@ class Metric extends System
 
     public static function scale()
     {
-        return self::$scale = self::$scale ?: new PowerScale(self::$base, self::$suffixes, self::MAXIMUM_PRECISION);
+        return self::$scale = self::$scale ?: new PowerScale(self::$base, self::$suffixes, self::COMPUTE_WITH_PRECISION);
     }
 
     public static function parser()

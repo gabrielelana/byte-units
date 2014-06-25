@@ -4,15 +4,15 @@ namespace ByteUnits;
 
 abstract class System
 {
-    const NORMAL_PRECISION = 2;
-    const MAXIMUM_PRECISION = 10;
+    const DEFAULT_FORMAT_PRECISION = 2;
+    const COMPUTE_WITH_PRECISION = 10;
 
     protected $formatter;
     protected $numberOfBytes;
 
-    public static function bytes($numberOf, $precision = self::NORMAL_PRECISION)
+    public static function bytes($numberOf, $formatWithPrecision = self::DEFAULT_FORMAT_PRECISION)
     {
-        return new static($numberOf, $precision);
+        return new static($numberOf, $formatWithPrecision);
     }
 
     public static function parse($bytesAsString)
@@ -74,7 +74,7 @@ abstract class System
         if (preg_match('/^(?P<coefficient>\d+(?:\.\d+))E\+(?P<exponent>\d+)$/', $numberOfBytes, $matches)) {
             $numberOfBytes = bcmul(
                 $matches['coefficient'],
-                bcpow($base = 10, $matches['exponent'], self::MAXIMUM_PRECISION)
+                bcpow($base = 10, $matches['exponent'], self::COMPUTE_WITH_PRECISION)
             );
         }
         return $numberOfBytes;
