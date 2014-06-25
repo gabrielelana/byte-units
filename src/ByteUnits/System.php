@@ -44,27 +44,27 @@ abstract class System
         );
     }
 
-    public function equalTo($another)
+    public function isEqualTo($another)
     {
         return self::compare($this, box($another)) === 0;
     }
 
-    public function greaterThanOrEqualTo($another)
+    public function isGreaterThanOrEqualTo($another)
     {
         return self::compare($this, box($another)) >= 0;
     }
 
-    public function greaterThan($another)
+    public function isGreaterThan($another)
     {
         return self::compare($this, box($another)) > 0;
     }
 
-    public function lessThanOrEqualTo($another)
+    public function isLessThanOrEqualTo($another)
     {
         return self::compare($this, box($another)) <= 0;
     }
 
-    public function lessThan($another)
+    public function isLessThan($another)
     {
         return self::compare($this, box($another)) < 0;
     }
