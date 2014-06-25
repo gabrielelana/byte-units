@@ -12,6 +12,7 @@ echo ByteUnits\parse('1.42MB')->add('256B')->format('kB/0000'); // outputs 1420.
 echo ByteUnits\parse('1.2GB')->isLessThan('256MB'); // outputs true
 ```
 
+### Parsing
 Right now two unit systems are supported:
 * The `Metric` system that is based on a 1000-byte kilobyte and uses standard SI suffixes (`kB`, `MB`, `GB`, `TB`, `PB`, …)
 * The `Binary` system that is based on a 1024-byte kilobyte and uses binary suffixes (`KiB`, `MiB`, `GiB`, `TiB`, `PiB`, …)
@@ -39,6 +40,7 @@ echo ByteUnits\Metric::megabytes(1)->format();  // outputs 1.00MB
 echo ByteUnits\Binary::bytes(1024)->asMetric()->format(); // outputs 1.02kB
 ```
 
+### Formatting
 In both systems you can format bytes with an appropriate format string
 ```php
 <?php
@@ -60,6 +62,7 @@ echo ByteUnits\bytes(1322123)->format('MB/000000'); // outputs 1.322123MB
 echo ByteUnits\bytes(1322123)->format('GB/9'); // outputs 0.001322123GB
 ```
 
+### Compare
 There are a few methods that could be used to compare bytes in various units and systems
 ```php
 <?php
@@ -69,6 +72,7 @@ ByteUnits\Metric::kilobytes(1)->isEqualTo(ByteUnits\Binary::bytes(1000)); // is 
 ByteUnits\Metric::kilobytes(1.3)->isGreaterThan(ByteUnits\Binary::kilobytes(1)); // is true
 ```
 
+### Manipulate
 Also you can add or remove bytes in various units and systems
 ```php
 <?php
@@ -82,6 +86,13 @@ echo ByteUnits\Binary::kilobytes(1)->add(ByteUnits\Metric::kilobytes(1))->format
 ByteUnits\Metric::kilobytes(1)->remove(ByteUnits\Binary::kilobytes(1))->format(); // throws ByteUnits\NegativeBytesException
 ```
 
+### Auto Boxing
+Most of the methods can take integers or strings and box them to appropriate byte units
+```php
+
+ByteUnits\Metric::kilobytes(1)->isLessThan('1KiB'); // is true
+echo ByteUnits\Binary::kilobytes(1)->remove('1KiB')->format(); // outputs 24B
+```
 
 ## Installation via [Composer](http://getcomposer.org/)
 
