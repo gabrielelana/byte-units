@@ -16,6 +16,14 @@ class ArithmeticTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Binary::bytes(3), Binary::bytes(5)->remove(Binary::bytes(2)));
     }
 
+    public function testAutoboxing()
+    {
+        $this->assertEquals(Metric::bytes(10), Metric::bytes(5)->add(5));
+        $this->assertEquals(Metric::bytes(10), Metric::bytes(5)->add('5B'));
+        $this->assertEquals(Metric::bytes(3), Metric::bytes(5)->remove(2));
+        $this->assertEquals(Metric::bytes(3), Metric::bytes(5)->remove('2B'));
+    }
+
     /**
      * @expectedException ByteUnits\NegativeBytesException
      */

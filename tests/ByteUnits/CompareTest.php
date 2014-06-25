@@ -33,4 +33,18 @@ class CompareTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Binary::bytes(1)->lessThanOrEqualTo(Metric::bytes(1)));
         $this->assertTrue(Binary::bytes(1)->lessThan(Metric::bytes(5)));
     }
+
+    public function testAutoboxing()
+    {
+        $this->assertTrue(Metric::bytes(1)->equalTo(1));
+        $this->assertTrue(Metric::bytes(1)->equalTo('1B'));
+        $this->assertTrue(Metric::bytes(1)->greaterThanOrEqualTo(1));
+        $this->assertTrue(Metric::bytes(1)->greaterThanOrEqualTo('1B'));
+        $this->assertTrue(Metric::bytes(5)->greaterThan(1));
+        $this->assertTrue(Metric::bytes(5)->greaterThan('1B'));
+        $this->assertTrue(Metric::bytes(1)->lessThanOrEqualTo(1));
+        $this->assertTrue(Metric::bytes(1)->lessThanOrEqualTo('1B'));
+        $this->assertTrue(Metric::bytes(1)->lessThan(5));
+        $this->assertTrue(Metric::bytes(1)->lessThan('5B'));
+    }
 }

@@ -31,7 +31,7 @@ abstract class System
     public function add($another)
     {
         return new static(
-            bcadd($this->numberOfBytes, $another->numberOfBytes, self::COMPUTE_WITH_PRECISION),
+            bcadd($this->numberOfBytes, box($another)->numberOfBytes, self::COMPUTE_WITH_PRECISION),
             $this->formatter->precision()
         );
     }
@@ -39,34 +39,34 @@ abstract class System
     public function remove($another)
     {
         return new static(
-            bcsub($this->numberOfBytes, $another->numberOfBytes, self::COMPUTE_WITH_PRECISION),
+            bcsub($this->numberOfBytes, box($another)->numberOfBytes, self::COMPUTE_WITH_PRECISION),
             $this->formatter->precision()
         );
     }
 
     public function equalTo($another)
     {
-        return self::compare($this, $another) === 0;
+        return self::compare($this, box($another)) === 0;
     }
 
     public function greaterThanOrEqualTo($another)
     {
-        return self::compare($this, $another) >= 0;
+        return self::compare($this, box($another)) >= 0;
     }
 
     public function greaterThan($another)
     {
-        return self::compare($this, $another) > 0;
+        return self::compare($this, box($another)) > 0;
     }
 
     public function lessThanOrEqualTo($another)
     {
-        return self::compare($this, $another) <= 0;
+        return self::compare($this, box($another)) <= 0;
     }
 
     public function lessThan($another)
     {
-        return self::compare($this, $another) < 0;
+        return self::compare($this, box($another)) < 0;
     }
 
     public static function compare($left, $right)
