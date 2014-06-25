@@ -26,6 +26,31 @@ abstract class System
         $this->numberOfBytes = $this->normalize($numberOfBytes);
     }
 
+    public function equalTo($another)
+    {
+        return $this->numberOfBytes === $another->numberOfBytes;
+    }
+
+    public function greaterThanOrEqualTo($another)
+    {
+        return $this->numberOfBytes >= $another->numberOfBytes;
+    }
+
+    public function greaterThan($another)
+    {
+        return $this->numberOfBytes > $another->numberOfBytes;
+    }
+
+    public function lessThanOrEqualTo($another)
+    {
+        return $this->numberOfBytes <= $another->numberOfBytes;
+    }
+
+    public function lessThan($another)
+    {
+        return $this->numberOfBytes < $another->numberOfBytes;
+    }
+
     public function format($howToFormat = null)
     {
         return $this->formatter->format($this->numberOfBytes, $howToFormat);
