@@ -28,4 +28,20 @@ class ParseTest extends \PHPUnit_Framework_TestCase
     {
         parse('Not a valid byte format');
     }
+
+    /**
+     * @expectedException ByteUnits\ParseException
+     */
+    public function testInvalidByteFormatForBinarySystem()
+    {
+        Binary::parse('1.00kB');
+    }
+
+    /**
+     * @expectedException ByteUnits\ParseException
+     */
+    public function testInvalidByteFormatForMetricSystem()
+    {
+        Metric::parse('1.00KiB');
+    }
 }

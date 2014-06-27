@@ -36,7 +36,7 @@ class PowerScale
     public function isKnownUnit($unitAsString)
     {
         return preg_match(
-            '/^' . implode('|', array_keys($this->scale)) . '$/i',
+            '/^(?:' . implode('|', array_keys($this->scale)) . ')$/i',
             trim($unitAsString)
         );
     }
