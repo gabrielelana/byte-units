@@ -9,7 +9,7 @@ This is a utility component for parsing, formatting, converting and manipulating
 echo ByteUnits\parse('1.42MB')->add('256B')->format('kB/0000'); // outputs 1420.2560kB
 
 // Bytes comparison
-ByteUnits\parse('1.2GB')->isLessThan('256MB'); // it's true
+ByteUnits\parse('1.2GB')->isMoreThan('256MB'); // it's true
 ```
 
 ### Parsing
