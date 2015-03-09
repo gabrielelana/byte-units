@@ -56,6 +56,7 @@ class Formatter
     private function formatInByteUnit($numberOfBytes, $byteUnit, $precision)
     {
         $scaled = $this->converter->scaleToUnit($numberOfBytes, $byteUnit);
+        if($byteUnit == null) $byteUnit = "B";
         if ($this->converter->isBaseUnit($byteUnit)) {
             return sprintf("%d%s", $scaled, $byteUnit);
         }

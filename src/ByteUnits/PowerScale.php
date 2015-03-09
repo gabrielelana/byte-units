@@ -53,6 +53,7 @@ class PowerScale
 
     public function normalUnitFor($quantity)
     {
+        if ($quantity === 0) return "B";
         foreach ($this->scale as $unit => $_) {
             $scaled = $this->scaleToUnit($quantity, $unit);
             if (bccomp($scaled, 1) >= 0) {
