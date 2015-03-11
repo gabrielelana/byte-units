@@ -11,6 +11,7 @@ class FormatInBinarySystemTest extends \PHPUnit_Framework_TestCase
 
     public function testFormatInMostReadableByteUnit()
     {
+        $this->assertEquals('0B', Binary::bytes(0)->format());
         $this->assertEquals('1B', Binary::bytes(1)->format());
         $this->assertEquals('1.00KiB', Binary::bytes(1024)->format());
         $this->assertEquals('1.25KiB', Binary::bytes(1280)->format());

@@ -11,6 +11,7 @@ class FormatInMetricSystemTest extends \PHPUnit_Framework_TestCase
 
     public function testFormatInMostReadableByteUnit()
     {
+        $this->assertEquals('0B', Metric::bytes(0)->format());
         $this->assertEquals('1B', Metric::bytes(1)->format());
         $this->assertEquals('1.00kB', Metric::bytes(1000)->format());
         $this->assertEquals('1.25kB', Metric::bytes(1250)->format());

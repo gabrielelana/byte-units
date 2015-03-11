@@ -17,6 +17,7 @@ class PowerScale
 
     public function scaleToUnit($quantity, $unit)
     {
+        if ($quantity === "0") return "0";
         return bcdiv(
             $quantity,
             bcpow($this->base, $this->scale[$unit], $this->precision),
@@ -52,6 +53,7 @@ class PowerScale
 
     public function normalUnitFor($quantity)
     {
+        if ($quantity === 0) return "B";
         foreach ($this->scale as $unit => $_) {
             $scaled = $this->scaleToUnit($quantity, $unit);
             if (bccomp($scaled, 1) >= 0) {
@@ -62,6 +64,6 @@ class PowerScale
 
     public function isBaseUnit($unit)
     {
-        return $this->scale[$unit] === 0;
+        return (!isset($this->scale[$unit]) || $this->scale[$unit] === 0);
     }
 }
