@@ -17,7 +17,7 @@ class Parser
 
     public function parse($quantityWithUnit)
     {
-        if (preg_match('/(?P<quantity>[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)(?P<unit>.*)/', $quantityWithUnit, $matches)) {
+        if (preg_match('/(?P<quantity>[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)\W*(?P<unit>.*)/', $quantityWithUnit, $matches)) {
             $quantity = $matches['quantity'];
             if ($this->scale->isKnownUnit($matches['unit'])) {
                 $unit = $this->scale->normalizeNameOfUnit($matches['unit']);

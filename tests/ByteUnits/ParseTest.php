@@ -21,6 +21,13 @@ class ParseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Metric::bytes(1000), parse('1000'));
     }
 
+    public function testParseWithSeparator()
+    {
+        $this->assertEquals(Metric::bytes(1000), parse('1.00 kB'));
+        $this->assertEquals(Metric::bytes(1000), parse('1.00/kB'));
+        $this->assertEquals(Metric::bytes(1000), parse('1.00~~~kB'));
+    }
+
     /**
      * @expectedException ByteUnits\ParseException
      */
