@@ -27,6 +27,12 @@ class FormatInBinarySystemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1.201216MiB', Binary::bytes(1259566)->format('/6'));
     }
 
+    public function testFormatInMostReadableByteUnitWithSepartor()
+    {
+        $this->assertEquals('1.20 MiB', Binary::bytes(1259566)->format(2, ' '));
+        $this->assertEquals('1.20/MiB', Binary::bytes(1259566)->format(2, '/'));
+    }
+
     public function testFormatInByteUnit()
     {
         $bytes = Binary::bytes(1250000000);

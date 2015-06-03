@@ -31,6 +31,12 @@ class FormatInMetricSystemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1.259566MB', Metric::bytes(1259566)->format('/6'));
     }
 
+    public function testFormatInMostReadableByteUnitWithSepartor()
+    {
+        $this->assertEquals('1.26 MB', Metric::bytes(1259566)->format(2, ' '));
+        $this->assertEquals('1.26/MB', Metric::bytes(1259566)->format(2, '/'));
+    }
+
     public function testFormatInByteUnit()
     {
         $bytes = Metric::bytes(1250000000);

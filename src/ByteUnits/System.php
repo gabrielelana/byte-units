@@ -76,9 +76,9 @@ abstract class System
         );
     }
 
-    public function format($howToFormat = null)
+    public function format($howToFormat = null, $separator = '')
     {
-        return $this->formatter->format($this->numberOfBytes, $howToFormat);
+        return $this->formatter->format($this->numberOfBytes, $howToFormat, $separator);
     }
 
     public function asBinary()

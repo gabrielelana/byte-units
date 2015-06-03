@@ -60,6 +60,10 @@ echo ByteUnits\bytes(1322123)->format('/6'); // outputs 1.322123MB
 echo ByteUnits\bytes(1322123)->format('MB/6'); // outputs 1.322123MB
 echo ByteUnits\bytes(1322123)->format('MB/000000'); // outputs 1.322123MB
 echo ByteUnits\bytes(1322123)->format('GB/9'); // outputs 0.001322123GB
+
+// You can specify a separator between then number and the units
+echo ByteUnits\bytes(1322000)->format('MB', ' '); // outputs 1.32 MB
+echo ByteUnits\bytes(1322000)->format('MB', '/'); // outputs 1.32/MB
 ```
 
 ### Compare

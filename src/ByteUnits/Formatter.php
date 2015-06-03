@@ -18,11 +18,11 @@ class Formatter
         return $this->precision;
     }
 
-    public function format($numberOfBytes, $howToFormat)
+    public function format($numberOfBytes, $howToFormat, $separator)
     {
         $precision = $this->precisionFrom($howToFormat);
         $byteUnit = $this->byteUnitToFormatTo($numberOfBytes, $howToFormat);
-        return $this->formatInByteUnit($numberOfBytes, $byteUnit, $precision);
+        return $this->formatInByteUnit($numberOfBytes, $byteUnit, $precision, $separator);
     }
 
     private function precisionFrom($howToFormat)
@@ -53,13 +53,13 @@ class Formatter
         return $this->converter->normalUnitFor($numberOfBytes);
     }
 
-    private function formatInByteUnit($numberOfBytes, $byteUnit, $precision)
+    private function formatInByteUnit($numberOfBytes, $byteUnit, $precision, $separator)
     {
         $scaled = $this->converter->scaleToUnit($numberOfBytes, $byteUnit);
         if($byteUnit == null) $byteUnit = "B";
         if ($this->converter->isBaseUnit($byteUnit)) {
-            return sprintf("%d%s", $scaled, $byteUnit);
+            return sprintf("%d%s%s", $scaled, $separator, $byteUnit);
         }
-        return sprintf("%.{$precision}f%s", $scaled, $byteUnit);
+        return sprintf("%.{$precision}f%s%s", $scaled, $separator, $byteUnit);
     }
 }
