@@ -108,7 +108,7 @@ echo ByteUnits\Binary::kilobytes(1)->remove('1KiB')->format(); // outputs 24B
 * Add a `composer.json` file to your project:
   ```json
   {
-    "require" {
+    "require": {
       "gabrielelana/byte-units": "0.2.*"
     }
   }
