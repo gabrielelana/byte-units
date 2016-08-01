@@ -110,4 +110,9 @@ abstract class System
         }
         return $numberOfBytes;
     }
+
+    public function getNumberOfBytes()
+    {
+        return $this->numberOfBytes;
+    }
 }
