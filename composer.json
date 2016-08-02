@@ -2,7 +2,7 @@
   "name": "gabrielelana/byte-units",
   "description": "Library to parse, format and convert byte units",
   "type": "library",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "keywords": ["byte", "units", "format", "parse", "convert", "size"],
   "homepage": "https://github.com/gabrielelana/byte-units",
   "license": "MIT",
