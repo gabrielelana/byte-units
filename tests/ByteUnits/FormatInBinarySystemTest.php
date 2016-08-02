@@ -62,4 +62,15 @@ class FormatInBinarySystemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('0.001TiB', $bytes->format('TiB/000'));
         $this->assertEquals('0.001137TiB', $bytes->format('TiB/6'));
     }
+
+    public function testNumberOfBytes()
+    {
+        $this->assertEquals('0', Binary::bytes(0)->numberOfBytes());
+        $this->assertEquals('1', Binary::bytes(1)->numberOfBytes());
+        $this->assertEquals('1024', Binary::bytes(1024)->numberOfBytes());
+        $this->assertEquals('1280', Binary::bytes(1280)->numberOfBytes());
+        $this->assertEquals('1572864', Binary::bytes(1572864)->numberOfBytes());
+        $this->assertEquals('1879048192', Binary::bytes(1879048192)->numberOfBytes());
+        $this->assertEquals('2199023255552', Binary::bytes(2199023255552)->numberOfBytes());
+    }
 }

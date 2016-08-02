@@ -111,7 +111,7 @@ abstract class System
         return $numberOfBytes;
     }
 
-    public function getNumberOfBytes()
+    public function numberOfBytes()
     {
         return $this->numberOfBytes;
     }
