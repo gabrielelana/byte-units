@@ -64,6 +64,10 @@ echo ByteUnits\bytes(1322123)->format('GB/9'); // outputs 0.001322123GB
 // You can specify a separator between then number and the units
 echo ByteUnits\bytes(1322000)->format('MB', ' '); // outputs 1.32 MB
 echo ByteUnits\bytes(1322000)->format('MB', '/'); // outputs 1.32/MB
+
+// If you don't want to format but get the number of bytes
+// NOTE: The output is a string to ensure that there's no overflow
+echo ByteUnits\bytes(1322000)->numberOfBytes(); // outputs 1322000
 ```
 
 ### Compare
