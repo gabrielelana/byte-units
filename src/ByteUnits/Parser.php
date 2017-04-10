@@ -15,6 +15,11 @@ class Parser
         $this->system = new ReflectionClass($system);
     }
 
+    /**
+     * @param string $quantityWithUnit
+     * @return System
+     * @throws ParseException
+     */
     public function parse($quantityWithUnit)
     {
         if (preg_match('/(?P<quantity>[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)\W*(?P<unit>.*)/', $quantityWithUnit, $matches)) {

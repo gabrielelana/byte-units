@@ -23,6 +23,11 @@ function bytes($numberOf)
     return new Metric($numberOf);
 }
 
+/**
+ * @param $bytesAsString
+ * @return System
+ * @throws Exception
+ */
 function parse($bytesAsString)
 {
     $lastParseException = null;
