@@ -113,7 +113,7 @@ echo ByteUnits\Binary::kilobytes(1)->remove('1KiB')->format(); // outputs 24B
   ```json
   {
     "require": {
-      "gabrielelana/byte-units": "*"
+      "gabrielelana/byte-units": "^0.5"
     }
   }
   ```
