@@ -1,28 +1,28 @@
 {
-  "name": "gabrielelana/byte-units",
-  "description": "Library to parse, format and convert byte units",
-  "type": "library",
-  "version": "0.4.0",
-  "keywords": ["byte", "units", "format", "parse", "convert", "size"],
-  "homepage": "https://github.com/gabrielelana/byte-units",
-  "license": "MIT",
-  "authors": [{
-    "name": "Gabriele Lana",
-    "email": "gabriele.lana@gmail.com"
-  }],
-  "autoload": {
-    "psr-4": {
-      "ByteUnits\\": "src/ByteUnits"
+    "name": "gabrielelana/byte-units",
+    "description": "Library to parse, format and convert byte units",
+    "type": "library",
+    "version": "0.4.0",
+    "keywords": ["byte", "units", "format", "parse", "convert", "size"],
+    "homepage": "https://github.com/gabrielelana/byte-units",
+    "license": "MIT",
+    "authors": [{
+        "name": "Gabriele Lana",
+        "email": "gabriele.lana@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "ByteUnits\\": "src/ByteUnits"
+        },
+        "files": [
+            "src/ByteUnits/functions.php"
+        ]
     },
-    "files": [
-      "src/ByteUnits/functions.php"
-    ]
-  },
-  "require": {
-    "php": ">=5.6.0",
-    "ext-bcmath": "*"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~5.0"
-  }
+    "require": {
+        "php": ">=5.6.0",
+        "ext-bcmath": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.0"
+    }
 }
