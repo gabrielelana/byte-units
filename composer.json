@@ -19,10 +19,10 @@
     ]
   },
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.6.0",
     "ext-bcmath": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.0"
+    "phpunit/phpunit": "~5.0"
   }
 }
