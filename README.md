@@ -5,7 +5,7 @@ This is a utility component for parsing, formatting, converting and manipulating
 ```php
 <?php
 
-// Bytes manipulation and formatting with explici precision
+// Bytes manipulation and formatting with explicit precision
 echo ByteUnits\parse('1.42MB')->add('256B')->format('kB/0000'); // outputs 1420.2560kB
 
 // Bytes comparison
