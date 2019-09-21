@@ -29,7 +29,7 @@ ByteUnits\parse('1.00kB'); // it's an instance of ByteUnits\Metric
 
 // You can also constraint parsing to a specific system
 ByteUnits\Metric::parse('1.00kB'); // it's an instance of ByteUnits\Metric
-ByteUnits\Binary::parse('1.00kB'); // throws a ByteUnits\ParseException
+ByteUnits\Binary::parse('1.00kiB'); // throws a ByteUnits\ParseException
 
 // For each systems there are static constructors, one for each supported unit
 echo ByteUnits\Metric::bytes(1000)->format();  // outputs 1.00kB
