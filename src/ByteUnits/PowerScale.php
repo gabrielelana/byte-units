@@ -30,7 +30,7 @@ class PowerScale
         return $quantity * bcpow(
             $this->base,
             $this->scale[$unit],
-            $this->precision
+            0
         );
     }
 
